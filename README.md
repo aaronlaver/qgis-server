@@ -27,12 +27,7 @@ docker network create qgis
 
 -e: environment variable to be used in the container
 # The command
-docker run -d --rm --name qgis-server --net=qgis --hostname=qgis-server \
-              -v $(pwd)/data:/data:ro -p 5555:5555 \
-              -e "QGIS_PROJECT_FILE=/data/osm.qgs" \
-              qgis-server
+docker run -d --rm --name qgis-server --net=qgis --hostname=qgis-server -v $(pwd)/data:/data:ro -p 5555:5555 -e "QGIS_PROJECT_FILE=/data/osm.qgs" qgis-server
               
 # Create NGINX Container with latest stable 1.18.0
-docker run -d --rm --name nginx --net=qgis --hostname=nginx \
-              -v $(pwd)/nginx.conf:/etc/nginx/conf.d/default.conf:ro -p 8080:80 \
-              nginx:1.18
+docker run -d --rm --name nginx --net=qgis --hostname=nginx -v $(pwd)/nginx.conf:/etc/nginx/conf.d/default.conf:ro -p 8080:80 nginx:1.18
