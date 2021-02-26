@@ -14,7 +14,7 @@ RUN apt-get update \
     # Please refer to QGIS install documentation and replace it with the latest one
     && wget -O - https://qgis.org/downloads/qgis-2020.gpg.key | gpg --import \
     && gpg --export --armor F7E06F06199EF2F2 | apt-key add - \
-    && echo "deb http://qgis.org/debian buster main" >> /etc/apt/sources.list.d/qgis.list \
+    && echo "deb https://qgis.org/debian-ltr buster main" >> /etc/apt/sources.list.d/qgis.list \
     && apt-get update \
     && apt-get install --no-install-recommends --no-install-suggests --allow-unauthenticated -y \
         qgis-server \
