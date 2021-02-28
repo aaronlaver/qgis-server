@@ -31,3 +31,6 @@ docker run -d --rm --name qgis-server --net=qgis --hostname=qgis-server -v $(pwd
               
 # Create NGINX Container with latest stable 1.18.0
 docker run -d --rm --name nginx --net=qgis --hostname=nginx -v $(pwd)/nginx.conf:/etc/nginx/conf.d/default.conf:ro -p 8080:80 nginx:1.18
+
+# Test at IP address/domain, port 8080 
+http://example.com:8080/qgis-server/?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetCapabilities
