@@ -69,8 +69,10 @@ RUN apk --no-cache add git fcgi php7 php7-fpm \
     php7-ldap
 
 WORKDIR /var/www
-
-RUN ln -s /var/www/lizmap-web-client-3.4.2/lizmap/www/ /var/www/html/landmark
+RUN wget https://github.com/aaronlaver/qgis-server/raw/qserver_with_lizmap/lizmap-web-client-3.4.2.zip
+    && unzip lizmap-web-client-3.4.2.zip
+    && ln -s /var/www/lizmap-web-client-3.4.2/lizmap/www/ /var/www/html/landmark
+    && rm lizmap-web-client-3.4.2.zip
 
 WORKDIR /var/www/lizmap-web-client-3.4.2/
 
@@ -79,9 +81,8 @@ RUN lizmap/install/set_rights.sh www-data www-data
 WORKDIR lizmap/var/config
 
 RUN cp lizmapConfig.ini.php.dist lizmapConfig.ini.php \
-    && cp localconfig.ini.php.dist localconfig.ini.php
-
-RUN php lizmap/install/installer.php
+    && cp localconfig.ini.php.dist localconfig.ini.php \
+    && php lizmap/install/installer.php
 
 WORKDIR /var/www/lizmap-web-client-3.4.2/
 
